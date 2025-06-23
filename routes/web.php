@@ -13,8 +13,12 @@ Route::get('/migrate', function () {
     return 'Migration done!';
 });
 
+Route::get('/', function () {
+    return 'It works!';
+});
+
 // Dashboard Page
-Route::get('/', [UserController::class, 'dashboardPage'])
+Route::get('/dashboard', [UserController::class, 'dashboardPage'])
 ->name('dashboard');
 
 // Login Routes
