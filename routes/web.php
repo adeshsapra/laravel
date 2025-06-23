@@ -4,8 +4,6 @@ use App\Http\Middleware\ValidUser;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmailController;
-use Illuminate\Support\Facades\Artisan;
-
 
 // Dashboard Page
 Route::get('/', [UserController::class, 'dashboardPage'])
@@ -38,8 +36,3 @@ Route::get('send-email',[EmailController::class,'sendEmail']);
 Route::post('contact',[EmailController::class,'sendContactEmail'])->name('contact');
 
 
-
-Route::get('/migrate', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return 'Migration done!';
-});
