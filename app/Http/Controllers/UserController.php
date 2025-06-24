@@ -44,7 +44,7 @@ class UserController extends Controller
 
     public function showLoginForm()
     {
-        return view('login'); // or 'auth.login' if stored in auth folder
+        return view('login');
     }
 
     public function login(Request $request)
@@ -64,32 +64,32 @@ class UserController extends Controller
 
     public function showRegisterForm()
     {
-        return view('register'); // or 'auth.register' if stored in auth folder
+        return view('register');
     }
 
-public function register(Request $request)
-{
-    $data = $request->validate([
-        'name' => 'required',
-        'email' => 'required|email|unique:users,email', // optional: ensure unique email
-        'age' => 'required|integer',
-        'role' => 'required|in:user,admin',
-        'password' => 'required|confirmed',
-    ]);
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'age' => 'required|integer',
+            'role' => 'required|in:user,admin',
+            'password' => 'required|confirmed',
+        ]);
 
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'age' => $data['age'],
-        'role' => $data['role'],
-        'password' => $data['password'],
-    ]);
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'age' => $data['age'],
+            'role' => $data['role'],
+            'password' => $data['password'],
+        ]);
 
-    if ($user) {
-        return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
-    } else {
-        return back()->with('error', 'Registration failed. Please try again.');
+        if ($user) {
+            return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
+        } else {
+            return back()->with('error', 'Registration failed. Please try again.');
+        }
     }
-}
 
 }

@@ -19,7 +19,7 @@ Route::get('/', [UserController::class, 'dashboardPage'])
 ->name('dashboard');
 
 // Login Routes
-Route::get('login', [UserController::class, 'showLoginForm'])
+Route::get('login', [UserController::class, 'dashboardPage'])
     ->name('login');
 
 Route::post('loginMatch', [UserController::class, 'login'])
