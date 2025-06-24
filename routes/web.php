@@ -8,10 +8,16 @@ use App\Http\Controllers\EmailController;
 
 use Illuminate\Support\Facades\Artisan;
 
+
 Route::get('/migrate', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return 'Migration done!';
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return response('<pre>' . Artisan::output() . '</pre>', 200);
+    } catch (\Exception $e) {
+        return response('<pre>' . $e->getMessage() . '</pre>', 500);
+    }
 });
+
 
 
 // Dashboard Page
